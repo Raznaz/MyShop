@@ -1,9 +1,9 @@
 import { Sequelize } from 'sequelize';
 
-const sequelize = new Sequelize(process.env.DB_NAME, 'postgres', 'joker', {
+const sequelize = new Sequelize('online', 'postgres', 'joker', {
   dialect: 'postgres',
-  host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT),
+  host: 'localhost',
+  port: 5432,
 });
 
 export default sequelize;

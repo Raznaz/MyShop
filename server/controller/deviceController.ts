@@ -8,8 +8,7 @@ class DeviceController {
     try {
       const { id } = await req.query;
       if (!id) {
-        console.log('no id');
-        next(ApiError.badRequest('Where is you ID'));
+        return next(ApiError.badRequest('Where is you ID'));
       }
       res.send(id);
     } catch (error) {

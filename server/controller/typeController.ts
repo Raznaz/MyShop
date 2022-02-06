@@ -1,5 +1,15 @@
+import ApiError from '../errors/apiError';
+import Model from '../models/model';
+
 class TypeController {
-  async create(req, res) {
+  async create(req, res, next) {
+    try {
+      const { name } = req.body;
+      const type = await Model.Type.create({ name });
+      return res.json(type);
+    } catch (error) {
+      next(ApiError.badRequest(error.message));
+    }
     res.json({ id: 2, type: 'mobile' });
   }
   async getAll(req, res) {

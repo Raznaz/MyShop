@@ -3,6 +3,8 @@ import typeController from '../controller/typeController';
 
 const router = express.Router();
 
-router.get('/', typeController.getType);
+router.post('/', typeController.create);
+router.get('/', typeController.getAll);
+router.delete('/', typeController.delete);
 
 export default router;

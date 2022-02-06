@@ -3,7 +3,8 @@ import dotenv from 'dotenv';
 import sequelize from './db';
 import cors from 'cors';
 import models from './models/model';
-import router from './Routers/router';
+import router from './Routers';
+import { errorHandler } from './utils/middleware/errorHandling';
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use('/api', router);
+app.use(errorHandler);
 
 const start = async () => {
   try {

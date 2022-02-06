@@ -3,6 +3,8 @@ import brandController from '../controller/brandController';
 
 const router = express.Router();
 
-router.get('/', brandController.getBrand);
+router.post('/', brandController.create);
+router.get('/', brandController.getAll);
+router.delete('/:id', brandController.delete);
 
 export default router;

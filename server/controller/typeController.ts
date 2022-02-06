@@ -1,5 +1,11 @@
 class TypeController {
-  async getType(req, res) {
+  async create(req, res) {
+    res.json({ id: 2, type: 'mobile' });
+  }
+  async getAll(req, res) {
+    res.json({ id: 2, type: 'mobile' });
+  }
+  async delete(req, res) {
     res.json({ id: 2, type: 'mobile' });
   }
 }

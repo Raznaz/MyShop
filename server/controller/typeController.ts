@@ -6,7 +6,7 @@ class TypeController {
     try {
       const { name } = req.body;
       const type = await Model.Type.create({ name });
-      return res.json(type);
+      return res.status(201).json(type);
     } catch (error) {
       next(ApiError.badRequest(error.message));
     }

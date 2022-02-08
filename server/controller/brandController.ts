@@ -3,7 +3,7 @@ class BrandController {
     res.send('Brand controller');
   }
   async getAll(req, res) {
-    res.send('Brand controller');
+    res.status(200).json({ id: 1, name: 'Nazar' });
   }
   async delete(req, res) {
     res.send('Brand controller');

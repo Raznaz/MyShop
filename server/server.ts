@@ -1,4 +1,4 @@
-import express, { Application } from 'express';
+import express from 'express';
 import dotenv from 'dotenv';
 import sequelize from './db';
 import cors from 'cors';
@@ -9,7 +9,7 @@ import { errorHandler } from './utils/middleware/errorHandling';
 dotenv.config();
 
 const PORT = process.env.PORT || 7000;
-export const app: Application = express();
+const app = express();
 app.use(cors());
 app.use(express.json());
 app.use('/api', router);

@@ -5,6 +5,7 @@ import cors from 'cors';
 import models from './models/model';
 import router from './Routers';
 import { errorHandler } from './utils/middleware/errorHandling';
+// import chalk from 'chalk';
 
 dotenv.config();
 

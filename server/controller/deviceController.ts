@@ -1,8 +1,13 @@
 import ApiError from '../errors/apiError';
 
 class DeviceController {
-  async create(req, res) {
-    res.json({ id: 1, name: 'test name' });
+  async create(req, res, next) {
+    try {
+      const { name, price, brandId, typeId, info } = req.body;
+      const { img } = req.files;
+    } catch (error) {
+      return next(ApiError.badRequest(error.message));
+    }
   }
   async getAll(req, res, next) {
     try {

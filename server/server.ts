@@ -5,6 +5,7 @@ import cors from 'cors';
 import models from './models/model';
 import router from './Routers';
 import { errorHandler } from './utils/middleware/errorHandling';
+import chalk from 'chalk';
 
 dotenv.config();
 
@@ -20,7 +21,7 @@ const start = async () => {
     await sequelize.authenticate();
     await sequelize.sync();
     app.listen(PORT, () =>
-      console.log('\x1b[1;35m', `==== Server was started on ${PORT} port =====`)
+      // console.log('\x1b[1;35m', `==== Server was started on ${PORT} port =====`)
     );
   } catch (error) {
     console.log(error.message);

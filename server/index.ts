@@ -4,7 +4,9 @@ import sequelize from './db';
 import cors from 'cors';
 import models from './models/model';
 import router from './Routers';
+import fileUpload from 'express-fileupload';
 import { errorHandler } from './utils/middleware/errorHandling';
+import path from 'path';
 // import chalk from 'chalk';
 
 dotenv.config();
@@ -13,6 +15,8 @@ const PORT = process.env.PORT || 7000;
 export const app: Application = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.resolve(__dirname, 'static')));
+app.use(fileUpload({}));
 app.use('/api', router);
 app.use(errorHandler);
 

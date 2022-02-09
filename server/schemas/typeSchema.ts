@@ -6,3 +6,12 @@ export const typeSchema = {
   required: ['name'],
   additionalProperties: false,
 };
+
+// export const typeSchemaDelete = {
+//   type: 'object',
+//   properties: {
+//     id: { type: 'integer' },
+//   },
+//   required: ['id'],
+//   additionalProperties: false,
+// };

@@ -2,8 +2,12 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    queryInterface.addColumn('users', 'isActivated', {
+    await queryInterface.addColumn('users', 'isActivated', {
       type: Sequelize.DataTypes.BOOLEAN,
+      defaultValue: false,
+    });
+    await queryInterface.addColumn('users', 'activationLink', {
+      type: Sequelize.DataTypes.STRING,
     });
   },
 

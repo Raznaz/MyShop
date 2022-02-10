@@ -7,7 +7,7 @@ const User = sequelize.define('user', {
   password: { type: DataTypes.STRING },
   role: { type: DataTypes.STRING, defaultValue: 'user' },
   isActivated: { type: DataTypes.BOOLEAN, defaultValue: false },
-  // activationLink: { type: DataTypes.STRING },
+  activationLink: { type: DataTypes.STRING },
 });
 
 const Basket = sequelize.define('basket', {

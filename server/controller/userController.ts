@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import ApiError from '../errors/apiError';
 import model from '../models/model';
 import jwt from 'jsonwebtoken';
+import { generateJwtToken } from '../utils/generateToken';
 
 class UserController {
   async register(req, res, next) {
@@ -23,11 +24,7 @@ class UserController {
 
     const basket = await model.Basket.create({ userId: user.id });
 
-    const token = jwt.sign(
-      { id: user.id, email, role },
-      process.env.SECRET_KEY,
-      { expiresIn: '1h' }
-    );
+    const token = generateJwtToken(user.id, email, role);
 
     return res.status(200).json(token);
   }
@@ -42,20 +39,18 @@ class UserController {
     }
 
     const comparePassword = await bcrypt.compare(password, candidate.password);
-    console.log(comparePassword);
+
     if (!comparePassword) {
       return next(ApiError.forbidden('Sorry, you password incorrect !'));
     }
 
-    const token = jwt.sign(
-      { id: candidate.id, email, role: candidate.role },
-      process.env.SECRET_KEY
-    );
+    const token = generateJwtToken(candidate.id, email, candidate.role);
 
     return res.status(200).json(token);
   }
+
   async check(req, res) {
-    res.send('test controller');
+    res.send('test controller AUTH');
   }
 }
 

@@ -1,10 +1,10 @@
 export const userSchema = {
   type: 'object',
   properties: {
-    email: { type: 'string' },
-    password: { type: 'string', min: 3 },
+    email: { type: 'string', format: 'email' },
+    password: { type: 'string', minLength: 3, maxLength: 6 },
     role: { type: 'string' },
   },
-  required: ['email'],
+  required: ['email', 'password'],
   additionalProperties: false,
 };

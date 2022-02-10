@@ -1,6 +1,6 @@
 import express from 'express';
 import typeController from '../controller/typeController';
-import { typeSchema, typeSchemaDelete } from '../schemas/typeSchema';
+import { typeSchema } from '../schemas/typeSchema';
 import { validator } from '../utils/middleware/validator';
 
 const router = express.Router();

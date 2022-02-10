@@ -5,14 +5,16 @@ import cors from 'cors';
 import router from './Routers';
 import fileUpload from 'express-fileupload';
 import { errorHandler } from './utils/middleware/errorHandling';
+import cookieParser from 'cookie-parser';
 import path from 'path';
 dotenv.config();
 
 const PORT = process.env.PORT || 7000;
 export const app: Application = express();
 
-app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
+app.use(cors());
 app.use(express.static(path.resolve(__dirname, 'static')));
 app.use(fileUpload({}));
 app.use('/api', router);

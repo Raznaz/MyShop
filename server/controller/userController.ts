@@ -26,7 +26,7 @@ class UserController {
 
     const token = generateJwtToken(user.id, email, role);
 
-    return res.status(200).json(token);
+    return res.status(200).json({ token });
   }
 
   async login(req, res, next) {
@@ -46,11 +46,13 @@ class UserController {
 
     const token = generateJwtToken(candidate.id, email, candidate.role);
 
-    return res.status(200).json(token);
+    return res.status(200).json({ token });
   }
 
   async check(req, res) {
-    res.send('test controller AUTH');
+    const token = generateJwtToken(req.user.id, req.user.email, req.user.role);
+
+    return res.json({ token });
   }
 }
 

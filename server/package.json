@@ -9,7 +9,7 @@
     "build": "tsc",
     "prestart": "npm run build",
     "server:watch": "ts-node-dev --respawn --transpile-only ./index.ts",
-    "dev": "nodemon ./index.ts",
+    "dev": "nodemon --watch ./index.ts -e ts --exec node --inspect-brk -r ts-node/register index.ts",
     "test": "jest"
   },
   "keywords": [],

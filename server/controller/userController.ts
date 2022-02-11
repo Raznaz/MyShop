@@ -3,31 +3,26 @@ import ApiError from '../errors/apiError';
 import model from '../models/model';
 import jwt from 'jsonwebtoken';
 import { generateJwtToken } from '../utils/generateToken';
+import userService from '../service/userService';
 
 class UserController {
   async register(req, res, next) {
     try {
-    } catch (error) {}
-    const { email, password, role } = req.body;
-    const candidate = await model.User.findOne({ where: { email } });
+      const { email, password, role } = req.body;
 
-    if (candidate) {
-      return next(ApiError.forbidden(`This ${email} has already exist`));
+      const userData = await userService.registration(email, password, role);
+
+      res.cookie('refreshToken', userData.refreshToken, {
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+      });
+      return res.status(200).json(userData);
+
+      // const candidate = await model.User.findOne({ where: { email } });
+      // return res.status(200).json({ token });
+    } catch (error) {
+      return next(ApiError.internal(error.message));
     }
-
-    const hashPassword = await bcrypt.hash(password, 5);
-
-    const user: any = await model.User.create({
-      email,
-      password: hashPassword,
-      role,
-    });
-
-    const basket = await model.Basket.create({ userId: user.id });
-
-    const token = generateJwtToken(user.id, email, role);
-
-    return res.status(200).json({ token });
   }
 
   async login(req, res, next) {

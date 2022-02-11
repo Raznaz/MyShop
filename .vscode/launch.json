@@ -5,11 +5,12 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "node",
+      "type": "pwa-node",
       "request": "launch",
-      "name": "online_shop",
+      "sourceMaps": true,
+      "name": "Launch Program",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}\\server\\utils\\middleware\\errorHandling.ts",
+      "program": "${workspaceFolder}/server/index.ts",
       "outFiles": ["${workspaceFolder}/**/*.js"]
     }
   ]

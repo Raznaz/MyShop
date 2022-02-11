@@ -54,7 +54,7 @@ const TypeBrand = sequelize.define('type_brand', {
 // Token
 
 const TypeToken = sequelize.define('token', {
-  refresh_token: { type: DataTypes.STRING, allowNull: false },
+  refresh_token: { type: DataTypes.STRING },
 });
 
 User.hasOne(Basket);

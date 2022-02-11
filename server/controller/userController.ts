@@ -6,8 +6,9 @@ import { generateJwtToken } from '../utils/generateToken';
 
 class UserController {
   async register(req, res, next) {
+    try {
+    } catch (error) {}
     const { email, password, role } = req.body;
-    console.log(email, password, role);
     const candidate = await model.User.findOne({ where: { email } });
 
     if (candidate) {
@@ -49,10 +50,55 @@ class UserController {
     return res.status(200).json({ token });
   }
 
-  async check(req, res) {
-    const token = generateJwtToken(req.user.id, req.user.email, req.user.role);
+  async logout(req, res, next) {
+    try {
+      await res.status(200).json({ logout: true });
+    } catch (error) {
+      return next(ApiError.badRequest(error.message));
+    }
+  }
 
-    return res.json({ token });
+  async activate(req, res, next) {
+    try {
+      await res.status(200).json(`Activate ${req.params.link}`);
+    } catch (error) {
+      return next(ApiError.badRequest(error.message));
+    }
+  }
+
+  async refresh(req, res, next) {
+    try {
+      await res.start(200).json(`REFRESH`);
+    } catch (error) {
+      return next(ApiError.badRequest(error.message));
+    }
+  }
+
+  async check(req, res, next) {
+    try {
+      const token = generateJwtToken(
+        req.user.id,
+        req.user.email,
+        req.user.role
+      );
+      return res.json({ token });
+    } catch (error) {
+      return next(ApiError.badRequest(error.message));
+    }
+  }
+
+  async users(req, res, next) {
+    try {
+      let { limit, page } = req.query;
+      page = page || 1;
+      limit = limit || 5;
+      let offset = page * limit - limit;
+
+      const response = await model.User.findAndCountAll({ limit, offset });
+      res.status(200).json(response);
+    } catch (error) {
+      return next(ApiError.badRequest(error.message));
+    }
   }
 }
 

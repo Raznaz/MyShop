@@ -9,6 +9,10 @@ const router = express.Router();
 // router.post('/register', userController.register);
 router.post('/register', [validator(userSchema)], userController.register);
 router.post('/login', userController.login);
+router.post('/logout', userController.logout);
+router.get('/activate/:link', userController.activate);
+router.get('/refresh', userController.refresh);
 router.get('/auth', [auth], userController.check);
+router.get('/users', [auth], userController.users);
 
 export default router;

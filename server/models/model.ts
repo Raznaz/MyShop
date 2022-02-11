@@ -54,8 +54,7 @@ const TypeBrand = sequelize.define('type_brand', {
 // Token
 
 const TypeToken = sequelize.define('token', {
-  access_token: { type: DataTypes.STRING },
-  refresh_token: { type: DataTypes.STRING },
+  refresh_token: { type: DataTypes.STRING, allowNull: false },
 });
 
 User.hasOne(Basket);
@@ -63,6 +62,11 @@ Basket.belongsTo(User);
 
 User.hasMany(Rating);
 Rating.belongsTo(User);
+
+// Token
+
+User.hasOne(TypeToken);
+TypeToken.belongsTo(User);
 
 Basket.hasMany(BasketDevice);
 BasketDevice.belongsTo(Basket);

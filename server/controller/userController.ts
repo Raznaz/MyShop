@@ -17,11 +17,8 @@ class UserController {
         httpOnly: true,
       });
       return res.status(200).json(userData);
-
-      // const candidate = await model.User.findOne({ where: { email } });
-      // return res.status(200).json({ token });
     } catch (error) {
-      return next(ApiError.internal(error.message));
+      return next(error);
     }
   }
 
@@ -55,7 +52,9 @@ class UserController {
 
   async activate(req, res, next) {
     try {
-      await res.status(200).json(`Activate ${req.params.link}`);
+      const { link } = req.params;
+      await userService.activate(link);
+      return res.status(301).redirect(process.env.CLIENT_URL);
     } catch (error) {
       return next(ApiError.badRequest(error.message));
     }

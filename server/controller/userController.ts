@@ -25,21 +25,24 @@ class UserController {
   async login(req, res, next) {
     const { email, password } = req.body;
 
-    const candidate: any = await model.User.findOne({ where: { email } });
+    const result: any = await userService.login(email, password);
 
-    if (!candidate) {
-      return next(ApiError.forbidden(`Sorry, ${email} does not exist.`));
-    }
+    res.cookie('refreshToken', result.refreshToken, {
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+      httpOnly: true,
+    });
 
-    const comparePassword = await bcrypt.compare(password, candidate.password);
+    // const candidate: any = await model.User.findOne({ where: { email } });
 
-    if (!comparePassword) {
-      return next(ApiError.forbidden('Sorry, you password incorrect !'));
-    }
+    // const comparePassword = await bcrypt.compare(password, candidate.password);
 
-    const token = generateJwtToken(candidate.id, email, candidate.role);
+    // if (!comparePassword) {
+    //   return next(ApiError.forbidden('Sorry, you password incorrect !'));
+    // }
 
-    return res.status(200).json({ token });
+    // const token = generateJwtToken(candidate.id, email, candidate.role);
+
+    return res.status(200).json({ result });
   }
 
   async logout(req, res, next) {

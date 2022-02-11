@@ -10,7 +10,6 @@ import ApiError from '../errors/apiError';
 class UserService {
   async registration(email, password, role) {
     const candidate = await model.User.findOne({ where: { email } });
-    // console.log(candidate);
     if (candidate) {
       throw ApiError.internal(
         `User has already exist with this ${email} email.`
@@ -27,18 +26,10 @@ class UserService {
       activationLink,
     });
 
-    // await mailService.sendActivationMail(
-    //   email,
-    //   `${process.env.API_URL}/api/user/activate/activationLink`
-    // );
-
     const basket = await model.Basket.create({ userId: user.id });
 
-    // const token = generateJwtToken(user.id, email, role);
     const userDto = new UserDto(user); // interface
-    console.log('userDto---', userDto);
     const tokens = tokenService.generateToken({ ...userDto });
-    console.log(`********tokens \n`, tokens);
     await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
     return {
@@ -48,10 +39,30 @@ class UserService {
     };
   }
 
+  async login(email, password) {
+    const candidate: any = await model.User.findOne({ where: { email } });
+
+    if (!candidate) {
+      throw ApiError.badRequest(`Sorry, ${email} does not exist.`);
+    }
+
+    const comparePassword = await bcrypt.compare(password, candidate.password);
+
+    if (!comparePassword) {
+      return ApiError.forbidden('Sorry, you password incorrect !');
+    }
+
+    const userDto = new UserDto(candidate);
+
+    const tokens = tokenService.generateToken({ ...userDto });
+
+    await tokenService.saveToken(userDto.id, tokens.refreshToken);
+
+    return { ...tokens, userDto };
+  }
+
   async activate(activationLink) {
-    console.log('user service activate');
     const user: any = await model.User.findOne({ where: { activationLink } });
-    console.log('====', user);
 
     if (!user) {
       throw new Error(`Sorry , we don't have link`);

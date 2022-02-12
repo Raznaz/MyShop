@@ -36,10 +36,10 @@ DA:16,2
 DA:18,2
 DA:19,2
 DA:20,2
-DA:21,0
+DA:21,1
 DA:22,0
 DA:23,0
-DA:26,1
+DA:26,0
 DA:30,2
 LF:21
 LH:18
@@ -49,7 +49,7 @@ BRF:2
 BRH:1
 end_of_record
 TN:
-SF:Routers/brandRouter.ts
+SF:Routers\brandRouter.ts
 FNF:0
 FNH:0
 DA:1,2
@@ -65,7 +65,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:Routers/deviceRouter.ts
+SF:Routers\deviceRouter.ts
 FNF:0
 FNH:0
 DA:1,2
@@ -82,7 +82,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:Routers/index.ts
+SF:Routers\index.ts
 FNF:0
 FNH:0
 DA:1,2
@@ -102,7 +102,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:Routers/typeRouter.ts
+SF:Routers\typeRouter.ts
 FNF:0
 FNH:0
 DA:1,2
@@ -120,7 +120,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:Routers/userRouters.ts
+SF:Routers\userRouters.ts
 FNF:0
 FNH:0
 DA:1,2
@@ -136,7 +136,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:controller/brandController.ts
+SF:controller\brandController.ts
 FN:2,(anonymous_7)
 FN:5,(anonymous_9)
 FN:8,(anonymous_11)
@@ -155,7 +155,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:controller/deviceController.ts
+SF:controller\deviceController.ts
 FN:4,(anonymous_8)
 FN:7,(anonymous_10)
 FN:18,(anonymous_12)
@@ -185,7 +185,7 @@ BRF:1
 BRH:0
 end_of_record
 TN:
-SF:controller/typeController.ts
+SF:controller\typeController.ts
 FN:5,(anonymous_8)
 FN:15,(anonymous_10)
 FN:18,(anonymous_12)
@@ -211,7 +211,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:controller/userController.ts
+SF:controller\userController.ts
 FN:2,(anonymous_7)
 FN:5,(anonymous_9)
 FN:8,(anonymous_11)
@@ -230,7 +230,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:errors/apiError.ts
+SF:errors\apiError.ts
 FN:4,(anonymous_0)
 FN:10,(anonymous_1)
 FN:14,(anonymous_2)
@@ -257,7 +257,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:models/model.ts
+SF:models\model.ts
 FNF:0
 FNH:0
 DA:1,2
@@ -296,7 +296,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:schemas/typeSchema.ts
+SF:schemas\typeSchema.ts
 FNF:0
 FNH:0
 DA:1,2
@@ -306,7 +306,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:utils/middleware/errorHandling.ts
+SF:utils\middleware\errorHandling.ts
 FN:3,(anonymous_1)
 FNF:1
 FNH:1
@@ -323,7 +323,7 @@ BRF:1
 BRH:0
 end_of_record
 TN:
-SF:utils/middleware/validator.ts
+SF:utils\middleware\validator.ts
 FN:4,(anonymous_1)
 FN:4,(anonymous_2)
 FNF:2

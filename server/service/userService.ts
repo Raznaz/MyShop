@@ -61,6 +61,11 @@ class UserService {
     return { ...tokens, userDto };
   }
 
+  async logout(refreshToken) {
+    const token = await tokenService.removeToken(refreshToken);
+    return token;
+  }
+
   async activate(activationLink) {
     const user: any = await model.User.findOne({ where: { activationLink } });
 

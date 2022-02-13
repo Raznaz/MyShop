@@ -10,7 +10,8 @@
     "prestart": "npm run build",
     "server:watch": "ts-node-dev --respawn --transpile-only ./index.ts",
     "dev": "nodemon --watch ./index.ts -e ts --exec node --inspect-brk -r ts-node/register index.ts",
-    "test": "jest"
+    "test": "jest",
+    "migration": "npx sequelize-cli db:migrate"
   },
   "keywords": [],
   "author": "",

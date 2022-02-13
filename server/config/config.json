@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "postgres",
-    "password": "root",
-    "database": "online_store",
+    "password": "joker",
+    "database": "online",
     "host": "localhost",
     "dialect": "postgres"
   },

@@ -23,33 +23,29 @@ class UserController {
   }
 
   async login(req, res, next) {
-    const { email, password } = req.body;
+    try {
+      const { email, password } = req.body;
 
-    const result: any = await userService.login(email, password);
+      const result: any = await userService.login(email, password);
 
-    res.cookie('refreshToken', result.refreshToken, {
-      maxAge: 30 * 24 * 60 * 60 * 1000,
-      httpOnly: true,
-    });
-
-    // const candidate: any = await model.User.findOne({ where: { email } });
-
-    // const comparePassword = await bcrypt.compare(password, candidate.password);
-
-    // if (!comparePassword) {
-    //   return next(ApiError.forbidden('Sorry, you password incorrect !'));
-    // }
-
-    // const token = generateJwtToken(candidate.id, email, candidate.role);
-
-    return res.status(200).json({ result });
+      res.cookie('refreshToken', result.refreshToken, {
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+      });
+      return res.status(200).json({ result });
+    } catch (error) {
+      next(error);
+    }
   }
 
   async logout(req, res, next) {
     try {
-      await res.status(200).json({ logout: true });
+      const { refreshToken } = req.cookies;
+      const resp = await userService.logout(refreshToken);
+      res.clearCookie('refreshToken');
+      return res.status(200).json(`User was logout, ${resp}`);
     } catch (error) {
-      return next(ApiError.badRequest(error.message));
+      return next(error);
     }
   }
 

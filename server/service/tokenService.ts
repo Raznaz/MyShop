@@ -27,6 +27,13 @@ class TokenService {
     });
     return token;
   }
+
+  async removeToken(refreshToken) {
+    const resp = model.TypeToken.destroy({
+      where: { refresh_token: refreshToken },
+    });
+    return resp;
+  }
 }
 
 export default new TokenService();

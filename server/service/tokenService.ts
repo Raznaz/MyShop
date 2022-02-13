@@ -35,6 +35,14 @@ class TokenService {
     return resp;
   }
 
+  async findToken(refreshToken) {
+    const res = await model.TypeToken.findOne({
+      where: { refresh_token: refreshToken },
+    });
+    console.log('RES find token', res);
+    return res;
+  }
+
   async validateAccessToken(accessToken) {
     try {
       const userPayload = jwt.verify(accessToken, process.env.SECRET_KEY);

@@ -71,9 +71,23 @@ class UserService {
       throw ApiError.unauthorized('Sorry, dont have token ');
     }
 
-    const userData = tokenService.validateRefreshToken(refreshToken);
+    const userData = await tokenService.validateRefreshToken(refreshToken);
 
-    console.log(userData);
+    const tokenFromDb = await tokenService.findToken(refreshToken);
+
+    console.log('>>>', userData, tokenFromDb);
+
+    if (!userData || !tokenFromDb) {
+      throw ApiError.unauthorized('mistake guys');
+    }
+
+    const user = await model.User.findOne({ where: { id: userData.id } });
+    const userDto = new UserDto(user);
+    const tokens = tokenService.generateToken({ ...userDto });
+
+    await tokenService.saveToken(userDto.id, tokens.refreshToken);
+
+    return { ...tokens, user: userDto };
   }
 
   async activate(activationLink) {

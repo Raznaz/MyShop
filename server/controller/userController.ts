@@ -63,11 +63,14 @@ class UserController {
     try {
       const { refreshToken } = req.cookies;
       const userData = await userService.refreshToken(refreshToken);
-      req.cookie('refreshToken', userData, {
+
+      console.log('controller -=====>>>', userData);
+      res.cookie('refreshToken', userData, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
       });
+      res.json(userData);
     } catch (error) {
-      return next(ApiError.badRequest(error.message));
+      return next(error);
     }
   }
 

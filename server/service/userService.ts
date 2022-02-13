@@ -75,12 +75,11 @@ class UserService {
 
     const tokenFromDb = await tokenService.findToken(refreshToken);
 
-    console.log('>>>', userData, tokenFromDb);
-
     if (!userData || !tokenFromDb) {
       throw ApiError.unauthorized('mistake guys');
     }
 
+    // Double move to function
     const user = await model.User.findOne({ where: { id: userData.id } });
     const userDto = new UserDto(user);
     const tokens = tokenService.generateToken({ ...userDto });
@@ -98,6 +97,11 @@ class UserService {
     }
     user.isActivated = true;
     await user.save();
+  }
+
+  async getAllUsers(limit, offset) {
+    const users = model.User.findAndCountAll({ limit, offset });
+    return users;
   }
 }
 

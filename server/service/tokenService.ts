@@ -3,7 +3,7 @@ import model from '../models/model';
 class TokenService {
   generateToken(payload) {
     const accessToken = jwt.sign(payload, process.env.SECRET_KEY, {
-      expiresIn: '1h',
+      expiresIn: '20s',
     });
 
     const refreshToken = jwt.sign(payload, process.env.SECRET_KEY_REFRESH, {
@@ -43,16 +43,17 @@ class TokenService {
     return res;
   }
 
-  async validateAccessToken(accessToken) {
+  validateAccessToken(accessToken) {
     try {
       const userPayload = jwt.verify(accessToken, process.env.SECRET_KEY);
+      console.log('validateAccessToken', userPayload);
       return userPayload;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       return null;
     }
   }
-  async validateRefreshToken(refreshToken) {
+  validateRefreshToken(refreshToken) {
     try {
       const userPayload = jwt.verify(
         refreshToken,

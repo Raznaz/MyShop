@@ -64,7 +64,6 @@ class UserController {
       const { refreshToken } = req.cookies;
       const userData = await userService.refreshToken(refreshToken);
 
-      console.log('controller -=====>>>', userData);
       res.cookie('refreshToken', userData, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
       });
@@ -94,7 +93,7 @@ class UserController {
       limit = limit || 5;
       let offset = page * limit - limit;
 
-      const response = await model.User.findAndCountAll({ limit, offset });
+      const response = await userService.getAllUsers(limit, offset);
       res.status(200).json(response);
     } catch (error) {
       return next(ApiError.badRequest(error.message));

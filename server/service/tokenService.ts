@@ -34,6 +34,36 @@ class TokenService {
     });
     return resp;
   }
+
+  async validateAccessToken(accessToken) {
+    try {
+      const userPayload = jwt.verify(accessToken, process.env.SECRET_KEY);
+      return userPayload;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  }
+  async validateRefreshToken(refreshToken) {
+    try {
+      const userPayload = jwt.verify(
+        refreshToken,
+        process.env.SECRET_KEY_REFRESH
+      );
+      return userPayload;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  }
+
+  async checkToken(token) {
+    const result = await model.TypeToken.findOne({
+      where: { refresh_token: token },
+    });
+    console.log(result);
+    return result;
+  }
 }
 
 export default new TokenService();

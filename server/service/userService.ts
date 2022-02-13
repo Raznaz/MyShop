@@ -66,6 +66,16 @@ class UserService {
     return token;
   }
 
+  async refreshToken(refreshToken) {
+    if (!refreshToken) {
+      throw ApiError.unauthorized('Sorry, dont have token ');
+    }
+
+    const userData = tokenService.validateRefreshToken(refreshToken);
+
+    console.log(userData);
+  }
+
   async activate(activationLink) {
     const user: any = await model.User.findOne({ where: { activationLink } });
 

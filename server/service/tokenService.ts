@@ -47,7 +47,9 @@ class TokenService {
 
   validateAccessToken(accessToken) {
     try {
+      console.log('validate ---=-=', accessToken);
       const userPayload = jwt.verify(accessToken, process.env.SECRET_KEY);
+
       return userPayload;
     } catch (error) {
       return null;

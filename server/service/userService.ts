@@ -101,7 +101,7 @@ class UserService {
   }
 
   async getAllUsers(limit, offset) {
-    const users = model.User.findAndCountAll({ limit, offset });
+    const users = await model.User.findAndCountAll({ limit, offset });
     return users;
   }
 }

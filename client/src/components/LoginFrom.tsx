@@ -1,4 +1,5 @@
 import { observable } from 'mobx';
+import { observer } from 'mobx-react-lite';
 import React, { useState } from 'react';
 import authStore from '../store/authStore';
 
@@ -8,6 +9,7 @@ const LoginFrom = () => {
 
   return (
     <div>
+      <h1>Login</h1>
       <input
         onChange={(e) => setEmail(e.target.value)}
         value={email}
@@ -25,4 +27,4 @@ const LoginFrom = () => {
   );
 };
 
-export default LoginFrom;
+export default observer(LoginFrom);

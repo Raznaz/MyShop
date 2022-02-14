@@ -19,6 +19,10 @@ export default class AuthService {
   }
 
   static async logout(): Promise<void> {
-    return api.post('/logout');
+    return api.post('/user/logout');
+  }
+
+  static async refresh(): Promise<void> {
+    return api.get('/user/refresh');
   }
 }

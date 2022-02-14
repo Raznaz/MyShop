@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite';
 import React, { useState } from 'react';
 import authStore from '../store/authStore';
 
@@ -7,7 +8,7 @@ const RegistrationForm = () => {
 
   return (
     <div>
-      <div>Registration</div>
+      <h1>Registration</h1>
       <input
         type="text"
         placeholder="Email"
@@ -27,4 +28,4 @@ const RegistrationForm = () => {
   );
 };
 
-export default RegistrationForm;
+export default observer(RegistrationForm);

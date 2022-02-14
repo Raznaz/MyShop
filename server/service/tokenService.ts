@@ -36,9 +36,12 @@ class TokenService {
   }
 
   async findToken(refreshToken) {
+    console.log(`find===> \n`, refreshToken);
     const res = await model.TypeToken.findOne({
       where: { refresh_token: refreshToken },
     });
+    console.log(`find===> \n`, res);
+
     return res;
   }
 
@@ -63,10 +66,9 @@ class TokenService {
   }
 
   async checkToken(token) {
-    const result = await model.TypeToken.findOne({
+    return await model.TypeToken.findOne({
       where: { refresh_token: token },
     });
-    return result;
   }
 }
 

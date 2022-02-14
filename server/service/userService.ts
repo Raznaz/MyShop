@@ -70,10 +70,11 @@ class UserService {
     if (!refreshToken) {
       throw ApiError.unauthorized('Sorry, dont have token ');
     }
-
+    console.log('validate------', refreshToken);
     const userData = await tokenService.validateRefreshToken(refreshToken);
-
+    console.log('1----------------', userData);
     const tokenFromDb = await tokenService.findToken(refreshToken);
+    console.log('2----------------', tokenFromDb);
 
     if (!userData || !tokenFromDb) {
       throw ApiError.unauthorized('mistake guys');

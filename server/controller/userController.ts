@@ -28,11 +28,12 @@ class UserController {
 
       const result: any = await userService.login(email, password);
 
+      console.log('result login ===> ', result.refreshToken);
       res.cookie('refreshToken', result.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
       });
-      return res.status(200).json({ result });
+      return res.status(200).json(result);
     } catch (error) {
       next(error);
     }
@@ -61,13 +62,17 @@ class UserController {
 
   async refresh(req, res, next) {
     try {
-      const { refreshToken } = req.cookies;
-      const userData = await userService.refreshToken(refreshToken);
+      const data = req.cookies;
+      console.log(`=+> \n`, data.refreshToken);
 
-      res.cookie('refreshToken', userData, {
+      const userData = await userService.refreshToken(data.refreshToken);
+
+      console.log(`userData---> \n`, userData);
+
+      res.cookie('refreshToken', userData.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
       });
-      res.json(userData);
+      res.status(200).json(userData);
     } catch (error) {
       return next(error);
     }

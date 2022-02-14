@@ -26,6 +26,9 @@ function App() {
         <h2>Welcome</h2>
         <button onClick={() => userStore.getAllUsers()}>Get user list</button>
         <button onClick={() => authStore.logout()}>Exit</button>
+        {userStore.users.map((user) => {
+          return <div key={user.email}>{user.email}</div>;
+        })}
       </div>
     );
   }

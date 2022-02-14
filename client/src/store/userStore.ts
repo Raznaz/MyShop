@@ -15,9 +15,9 @@ class UserStore {
 
   async getAllUsers() {
     try {
-      const response = await UserService.getAllUsers();
-      console.log(response.data);
-      this.setUsers(response.data);
+      const response: any = await UserService.getAllUsers();
+      console.log(response.data.rows);
+      this.setUsers(response.data.rows);
     } catch (error) {
       console.log(error);
     }

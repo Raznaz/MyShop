@@ -3,7 +3,7 @@ import model from '../models/model';
 class TokenService {
   generateToken(payload) {
     const accessToken = jwt.sign(payload, process.env.SECRET_KEY, {
-      expiresIn: '20s',
+      expiresIn: '30s',
     });
 
     const refreshToken = jwt.sign(payload, process.env.SECRET_KEY_REFRESH, {
@@ -39,17 +39,14 @@ class TokenService {
     const res = await model.TypeToken.findOne({
       where: { refresh_token: refreshToken },
     });
-    console.log('RES find token', res);
     return res;
   }
 
   validateAccessToken(accessToken) {
     try {
       const userPayload = jwt.verify(accessToken, process.env.SECRET_KEY);
-      console.log('validateAccessToken', userPayload);
       return userPayload;
     } catch (error) {
-      // console.log(error);
       return null;
     }
   }
@@ -61,7 +58,6 @@ class TokenService {
       );
       return userPayload;
     } catch (error) {
-      console.log(error);
       return null;
     }
   }
@@ -70,7 +66,6 @@ class TokenService {
     const result = await model.TypeToken.findOne({
       where: { refresh_token: token },
     });
-    console.log(result);
     return result;
   }
 }

@@ -1,7 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { IBrand } from '../interfaces/IBrand';
 import { IDevice } from '../interfaces/IDevice';
-import { IType } from '../interfaces/IType';
 
 class DeviceStore {
   devices: IDevice[];

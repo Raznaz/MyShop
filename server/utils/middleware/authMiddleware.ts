@@ -8,13 +8,13 @@ export const auth = (req, res, next) => {
   }
   try {
     const token = req.headers.authorization.split(' ')[1];
-    // console.log(token);
+    console.log('token header', token.trim());
     if (!token) {
       return next(ApiError.unauthorized('You are not authorization'));
     }
 
     const userData = tokenService.validateAccessToken(token);
-    console.log('userData', userData);
+    console.log('userData middleware >>>', userData);
     if (!userData) {
       return next(ApiError.unauthorized('You are not authorization'));
     }

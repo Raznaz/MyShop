@@ -1,15 +1,21 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
+import React, { useEffect } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Admin from '../page/Admin';
 import Shop from '../page/Shop';
 import { authRoutes, publicRoutes } from '../Router/routes';
-import { ADMIN_ROUTE } from '../utils/constats';
+import authStore from '../store/authStore';
+import { ADMIN_ROUTE, SHOP_ROUTE } from '../utils/constats';
 
 const AppRouter = () => {
-  const isAuth = false;
+  useEffect(() => {
+    authStore.checkAuth();
+  }, []);
+  console.log('isAuth>>>', authStore.isAuth);
+
   return (
     <Switch>
-      {isAuth &&
+      {authStore.isAuth &&
         authRoutes.map(({ path, Component }) => {
           return <Route key={path} path={path} component={Component} exact />;
         })}
@@ -17,8 +23,9 @@ const AppRouter = () => {
       {publicRoutes.map(({ path, Component }) => {
         return <Route key={path} path={path} component={Component} exact />;
       })}
+      <Redirect to={SHOP_ROUTE} />
     </Switch>
   );
 };
 
-export default AppRouter;
+export default observer(AppRouter);

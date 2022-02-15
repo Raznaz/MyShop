@@ -1,3 +1,5 @@
+import LoginFrom from '../components/LoginFrom';
+import RegistrationForm from '../components/RegistrationForm';
 import Admin from '../page/Admin';
 import Auth from '../page/Auth';
 import Basket from '../page/Basket';

@@ -3,8 +3,10 @@ import React, { useEffect } from 'react';
 import LoginFrom from './components/LoginFrom';
 import RegistrationForm from './components/RegistrationForm';
 import UserList from './components/users/UserList';
+import { BrowserRouter } from 'react-router-dom';
 import authStore from './store/authStore';
 import userStore from './store/userStore';
+import AppRouter from './components/AppRouter';
 
 function App() {
   useEffect(() => {
@@ -15,29 +17,28 @@ function App() {
     }
   }, []);
 
-  if (authStore.isLoading) {
-    return <div>Loading ....</div>;
-  }
+  // if (authStore.isLoading) {
+  //   return <div>Loading ....</div>;
+  // }
 
-  if (authStore.isAuth) {
-    return (
-      <div>
-        <h1>Online Shop</h1>
-        <h2>Welcome</h2>
-        <button onClick={() => userStore.getAllUsers()}>Get user list</button>
-        <button onClick={() => authStore.logout()}>Exit</button>
-        {userStore.users.map((user) => {
-          return <div key={user.email}>{user.email}</div>;
-        })}
-      </div>
-    );
-  }
+  // if (authStore.isAuth) {
+  //   return (
+  //     <div>
+  //       <h1>Online Shop</h1>
+  //       <h2>Welcome</h2>
+  //       <button onClick={() => userStore.getAllUsers()}>Get user list</button>
+  //       <button onClick={() => authStore.logout()}>Exit</button>
+  //       {userStore.users.map((user) => {
+  //         return <div key={user.email}>{user.email}</div>;
+  //       })}
+  //     </div>
+  //   );
+  // }
 
   return (
-    <div>
-      <LoginFrom />
-      <RegistrationForm />
-    </div>
+    <BrowserRouter>
+      <AppRouter />
+    </BrowserRouter>
   );
 }
 

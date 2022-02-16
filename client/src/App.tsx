@@ -11,9 +11,7 @@ import NavBar from './components/NavBar';
 
 function App() {
   useEffect(() => {
-    console.log(localStorage.getItem('access_token'));
     if (localStorage.getItem('access_token')) {
-      console.log('inside');
       authStore.checkAuth();
     }
   }, []);

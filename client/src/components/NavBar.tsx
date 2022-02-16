@@ -13,6 +13,11 @@ import {
 const NavBar = () => {
   const history = useHistory();
 
+  const logout = async () => {
+    const response = await authStore.logout();
+    console.log('LOGOUT');
+  };
+
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -28,11 +33,10 @@ const NavBar = () => {
               </Button>
               <Button
                 style={{ marginRight: '20px' }}
-                variant={'outline-light'}
-                onClick={() => history.push(LOGIN_ROUTE)}>
+                variant={'outline-danger'}
+                onClick={() => logout()}>
                 Logout
               </Button>
-              <Button variant={'outline-light'}>Exit</Button>
             </Nav>
           ) : (
             <Nav className="ml-auto">

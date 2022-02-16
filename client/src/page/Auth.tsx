@@ -20,7 +20,13 @@ const Auth = () => {
 
   const registration = async () => {
     const response = await authStore.registration(email, password);
-    console.log('response AUTH FILE', response);
+    console.log('response REG FILE', response);
+    history.push(ADMIN_ROUTE);
+  };
+
+  const login = async () => {
+    const response = await authStore.login(email, password);
+    console.log('resp LOGIN FILE', response);
     history.push(ADMIN_ROUTE);
   };
 

@@ -58,7 +58,7 @@ class AuthStore {
   async logout() {
     try {
       const response: any = await AuthService.logout();
-      console.log(response.data);
+      console.log('LOGOUT', response.data);
       localStorage.removeItem('access_token');
       this.setAuth(false);
       this.setUser({} as IUser);
@@ -70,15 +70,13 @@ class AuthStore {
   async checkAuth() {
     this.setLoading(true);
     try {
-      console.log('check');
-
       const response: any = await AuthService.refresh();
-      console.log(response.data);
+      console.log('checkAuth store');
       localStorage.setItem('access_token', response.data.accessToken);
       this.setAuth(true);
       this.setUser(response.data.user);
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      console.log(error.message);
     } finally {
       this.setLoading(false);
     }

@@ -6,7 +6,7 @@ import AuthService from '../service/AuthService';
 
 class AuthStore {
   user = {} as IUser;
-  isAuth = false;
+  isAuth = true;
   isLoading = false;
 
   constructor() {

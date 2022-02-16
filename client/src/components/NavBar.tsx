@@ -1,11 +1,13 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { Button, Container, Nav, Navbar } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import authStore from '../store/authStore';
-import { SHOP_ROUTE } from '../utils/constats';
+import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from '../utils/constats';
 
 const NavBar = () => {
+  const history = useHistory();
+
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -13,11 +15,17 @@ const NavBar = () => {
           <NavLink to={SHOP_ROUTE}>Online-Shop</NavLink>
           {authStore.isAuth ? (
             <Nav className="ml-auto">
-              <Button style={{ marginRight: '20px' }} variant={'outline-light'}>
+              <Button
+                style={{ marginRight: '20px' }}
+                variant={'outline-light'}
+                onClick={() => history.push(ADMIN_ROUTE)}>
                 Admin panel
               </Button>
-              <Button style={{ marginRight: '20px' }} variant={'outline-light'}>
-                Login
+              <Button
+                style={{ marginRight: '20px' }}
+                variant={'outline-light'}
+                onClick={() => history.push(LOGIN_ROUTE)}>
+                Logout
               </Button>
               <Button variant={'outline-light'}>Exit</Button>
             </Nav>

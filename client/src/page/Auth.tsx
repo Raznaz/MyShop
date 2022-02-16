@@ -33,7 +33,7 @@ const Auth = () => {
 
             {isLogin ? (
               <div>
-                Don't have account?{' '}
+                Don't have account?
                 <NavLink to={REGISTRATION_ROUTE}>Registration</NavLink>
               </div>
             ) : (

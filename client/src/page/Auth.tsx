@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Card, Container, Form, Row } from 'react-bootstrap';
 import { NavLink, useLocation } from 'react-router-dom';
+import authStore from '../store/authStore';
 import { LOGIN_ROUTE, REGISTRATION_ROUTE } from '../utils/constats';
 
 const Auth = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const location = useLocation();
   const isLogin = location.pathname === LOGIN_ROUTE;
+
+  const registration = async () => {
+    const response = authStore.registration(email, password);
+    console.log(response);
+  };
 
   return (
     <Container
@@ -14,8 +22,19 @@ const Auth = () => {
       <Card style={{ width: 600 }} className="p-5">
         <h2 className="m-auto">{isLogin ? 'Login' : 'Registration'} </h2>
         <Form className="d-flex flex-column">
-          <Form.Control className="mt-3" placeholder="Enter your email" />
-          <Form.Control className="mt-3" placeholder="Enter your password" />
+          <Form.Control
+            className="mt-3"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Form.Control
+            className="mt-3"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+          />
           <Row>
             {isLogin ? (
               <Button
@@ -26,7 +45,8 @@ const Auth = () => {
             ) : (
               <Button
                 variant={'outline-primary'}
-                className="mt-5 align-self-end">
+                className="mt-5 align-self-end"
+                onClick={registration}>
                 Registration
               </Button>
             )}

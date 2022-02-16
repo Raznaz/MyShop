@@ -26,7 +26,7 @@ const Auth = () => {
 
   const login = async () => {
     const response = await authStore.login(email, password);
-    console.log('resp LOGIN FILE', response);
+    console.log('resp LOGIN FILE OK', response);
     history.push(ADMIN_ROUTE);
   };
 
@@ -54,7 +54,8 @@ const Auth = () => {
             {isLogin ? (
               <Button
                 variant={'outline-success'}
-                className="mt-5 align-self-end">
+                className="mt-5 align-self-end"
+                onClick={login}>
                 Login
               </Button>
             ) : (

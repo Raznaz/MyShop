@@ -1,4 +1,5 @@
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 import { makeAutoObservable } from 'mobx';
 import { IUser } from '../interfaces/IUser';
 import { AuthResponse } from '../models/response/AuthResponse';
@@ -6,7 +7,7 @@ import AuthService from '../service/AuthService';
 
 class AuthStore {
   user = {} as IUser;
-  isAuth = true;
+  isAuth = false;
   isLoading = false;
 
   constructor() {
@@ -39,13 +40,16 @@ class AuthStore {
 
   async registration(email: string, password: string) {
     try {
-      const response = await AuthService.registration(email, password);
+      const { data } = await AuthService.registration(email, password);
 
-      console.log('registration===', response.data);
+      console.log('registration===', data);
+      console.log(data);
+      console.log('jwtDecode===>', jwtDecode(data.accessToken));
 
-      localStorage.setItem('access_token', response.data.accessToken);
+      localStorage.setItem('access_token', data.accessToken);
       this.setAuth(true);
-      this.setUser(response.data.user);
+      this.setUser(data.user);
+      return data;
     } catch (error) {
       console.log(error);
     }

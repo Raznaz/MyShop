@@ -1,8 +1,14 @@
+import { observer } from 'mobx-react-lite';
 import React, { useState } from 'react';
 import { Button, Card, Container, Form, Row } from 'react-bootstrap';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import authStore from '../store/authStore';
-import { LOGIN_ROUTE, REGISTRATION_ROUTE } from '../utils/constats';
+import {
+  ADMIN_ROUTE,
+  LOGIN_ROUTE,
+  REGISTRATION_ROUTE,
+} from '../utils/constats';
+import Admin from './Admin';
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -10,9 +16,12 @@ const Auth = () => {
   const location = useLocation();
   const isLogin = location.pathname === LOGIN_ROUTE;
 
+  const history = useHistory();
+
   const registration = async () => {
-    const response = authStore.registration(email, password);
-    console.log(response);
+    const response = await authStore.registration(email, password);
+    console.log('response AUTH FILE', response);
+    history.push(ADMIN_ROUTE);
   };
 
   return (
@@ -68,4 +77,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default observer(Auth);

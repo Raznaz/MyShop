@@ -3,7 +3,12 @@ import React from 'react';
 import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 import { NavLink, useHistory } from 'react-router-dom';
 import authStore from '../store/authStore';
-import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from '../utils/constats';
+import {
+  ADMIN_ROUTE,
+  LOGIN_ROUTE,
+  REGISTRATION_ROUTE,
+  SHOP_ROUTE,
+} from '../utils/constats';
 
 const NavBar = () => {
   const history = useHistory();
@@ -31,8 +36,14 @@ const NavBar = () => {
             </Nav>
           ) : (
             <Nav className="ml-auto">
-              <Button style={{ marginRight: '20px' }}>Registration</Button>
-              <Button className="mr-2" onClick={() => authStore.setAuth(true)}>
+              <Button
+                onClick={() => history.push(REGISTRATION_ROUTE)}
+                style={{ marginRight: '20px' }}>
+                Registration
+              </Button>
+              <Button
+                className="mr-2"
+                onClick={() => history.push(LOGIN_ROUTE)}>
                 Login
               </Button>
             </Nav>

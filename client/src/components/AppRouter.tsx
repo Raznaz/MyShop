@@ -11,7 +11,6 @@ const AppRouter = () => {
   useEffect(() => {
     authStore.checkAuth();
   }, []);
-  console.log('isAuth>>>', authStore.isAuth);
 
   return (
     <Switch>

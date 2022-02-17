@@ -19,11 +19,6 @@ function App() {
     }
   }, []);
 
-  useEffect(() => {
-    brandStore.getAllBrands();
-    typeStore.getAllTypes();
-  }, []);
-
   // if (authStore.isLoading) {
   //   return <Spinner animation="grow" />;
   // }

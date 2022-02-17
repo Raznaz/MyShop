@@ -7,7 +7,7 @@ import DeviceItem from './DeviceItem';
 const DeviceList = () => {
   return (
     <Row className="d-flex">
-      {deviceStore.devices.map((device) => {
+      {deviceStore.devices.map((device: any) => {
         return <DeviceItem key={device.id} {...device} />;
       })}
     </Row>

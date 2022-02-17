@@ -6,7 +6,7 @@ import iphone from '../../assets/iPhone-11-Pro.png';
 import { useHistory } from 'react-router-dom';
 import { DEVICE_ROUTE } from '../../utils/constats';
 
-const DeviceItem = ({ id, img, name, rating }: IDevice) => {
+const DeviceItem = ({ id, img, name, rating, price }: IDevice) => {
   const history = useHistory();
 
   return (
@@ -15,9 +15,9 @@ const DeviceItem = ({ id, img, name, rating }: IDevice) => {
       className={'mt-3'}
       onClick={() => history.push(DEVICE_ROUTE + '/' + id)}>
       <Card style={{ width: 150, cursor: 'pointer' }} border={'light'}>
-        <Image width={150} height={150} src={iphone} />
+        <Image width={150} height={150} src={img} />
         <div className="d-flex justify-content-between align-items-center mt-1">
-          <div>{name}</div>{' '}
+          <div>{price}</div>{' '}
           <div className="d-flex justify-content-between align-items-center">
             <div>{rating}</div>
             <Image src={star} />

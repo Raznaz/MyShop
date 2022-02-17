@@ -32,6 +32,16 @@ class TypeStore {
       const { data }: any = await TypeService.getAllTypes();
       console.log(data);
       this.setTypes(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async createType(type: string) {
+    try {
+      const { data } = await TypeService.createType(type);
+      return data;
     } catch (error) {
       console.log(error);
     }

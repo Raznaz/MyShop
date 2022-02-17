@@ -6,6 +6,10 @@ export default class DeviceService {
     return api.get('/device');
   }
 
+  static async getOneDevice(id: number): Promise<AxiosResponse<IDevice>> {
+    return api.get(`device/${id}`);
+  }
+
   static async createDevice(device: IDevice) {
     return api.post('/device', { ...device });
   }

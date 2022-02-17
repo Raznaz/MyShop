@@ -36,6 +36,15 @@ class BrandStore {
       console.log(error);
     }
   }
+
+  async crateBrand(name: string) {
+    try {
+      const { data } = await BrandService.createBrand(name);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 export default new BrandStore();

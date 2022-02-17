@@ -1,25 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
 import iphone from '../assets/iPhone-11-Pro.png';
 import bigStar from '../assets/bigStar.png';
+import { useParams } from 'react-router-dom';
+import deviceStore from '../store/deviceStore';
 
 const DevicePage = () => {
-  const description = [
-    { id: 1, title: 'Memory', description: '5 Gb' },
-    { id: 2, title: 'Camera', description: '40 Mpx' },
-    { id: 3, title: 'Processor', description: 'Inter i7' },
-    { id: 4, title: 'Count core', description: '8' },
-    { id: 5, title: 'Battery', description: '4000' },
-  ];
+  const { id }: any = useParams();
+
+  console.log('data', id);
+
+  useEffect(() => {
+    deviceStore.getOneDevice(id);
+  }, []);
+
+  console.log('DeviceItem', deviceStore.oneDevice);
   return (
     <Container className="mt-3">
       <Row>
         <Col md={4}>
-          <Image width={300} height={300} src={iphone} />
+          <Image
+            width={300}
+            height={300}
+            src={
+              process.env.REACT_APP_API_URL + '/' + deviceStore.oneDevice.img
+            }
+          />
         </Col>
         <Col md={4}>
           <Row className="d-flex flex-column align-items-center justify-content-center">
-            <h2 style={{ textAlign: 'center' }}>EXAMPLE device name</h2>
+            <h2 style={{ textAlign: 'center' }}>
+              {deviceStore.oneDevice?.name}
+            </h2>
             <div
               className="d-flex align-items-center justify-content-center"
               style={{
@@ -42,14 +54,14 @@ const DevicePage = () => {
               fontSize: 32,
               border: '5px solid lightgray',
             }}>
-            <h3>Price: 34343</h3>
+            <h3>{deviceStore.oneDevice?.price}</h3>
             <Button variant={'outline-dark'}>Add to cart</Button>
           </Card>
         </Col>
       </Row>
       <Row className="d-flex flex-column m-3">
         <h1>Specification</h1>
-        {description.map((item, i) => {
+        {/* {description.map((item, i) => {
           return (
             <Row
               key={item.id}
@@ -60,7 +72,7 @@ const DevicePage = () => {
               {item.title}: {item.description}
             </Row>
           );
-        })}
+        })} */}
       </Row>
     </Container>
   );

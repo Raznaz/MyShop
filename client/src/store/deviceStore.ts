@@ -4,14 +4,20 @@ import DeviceService from '../service/deviceService';
 
 class DeviceStore {
   devices: IDevice[];
+  oneDevice: any;
   constructor() {
     makeAutoObservable(this);
 
     this.devices = [];
+    this.oneDevice = { info: [] };
   }
 
   setDevices(devices: IDevice[]) {
     this.devices = devices;
+  }
+
+  setOneDevice(device: IDevice) {
+    this.oneDevice = device;
   }
 
   get allDevices() {
@@ -24,6 +30,16 @@ class DeviceStore {
       console.log('store devices', data);
       this.setDevices(data.rows);
       return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getOneDevice(id: number) {
+    try {
+      const { data } = await DeviceService.getOneDevice(id);
+      console.log(data);
+      this.setOneDevice(data);
     } catch (error) {
       console.log(error);
     }

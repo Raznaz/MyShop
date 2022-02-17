@@ -77,6 +77,8 @@ class UserService {
     console.log('2----------------', tokenFromDb);
 
     if (!userData || !tokenFromDb) {
+      console.log(userData, '===');
+      console.log(tokenFromDb);
       throw ApiError.unauthorized('mistake guys');
     }
 

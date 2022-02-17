@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { IUser } from '../interfaces/IUser';
-import UserService from '../service/UserService';
+import UserService from '../service/userService';
 
 class UserStore {
   users: IUser[];

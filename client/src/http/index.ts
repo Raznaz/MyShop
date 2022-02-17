@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { config } from 'process';
 import { AuthResponse } from '../models/response/AuthResponse';
-import AuthService from '../service/AuthService';
+import AuthService from '../service/authService';
 
 const API_URL = process.env.REACT_APP_API_URL;
 

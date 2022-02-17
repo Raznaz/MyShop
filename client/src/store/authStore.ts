@@ -3,7 +3,7 @@ import jwtDecode from 'jwt-decode';
 import { makeAutoObservable } from 'mobx';
 import { IUser } from '../interfaces/IUser';
 import { AuthResponse } from '../models/response/AuthResponse';
-import AuthService from '../service/AuthService';
+import AuthService from '../service/authService';
 
 class AuthStore {
   user = {} as IUser;

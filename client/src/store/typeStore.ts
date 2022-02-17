@@ -1,5 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { IType } from '../interfaces/IType';
+import TypeService from '../service/typeService';
 
 class TypeStore {
   types: IType[];
@@ -7,13 +8,7 @@ class TypeStore {
   constructor() {
     makeAutoObservable(this);
     this.selectType = {};
-    this.types = [
-      { id: 1, name: 'Mobile phones' },
-      { id: 2, name: 'Laptop' },
-      { id: 3, name: 'Books' },
-      { id: 4, name: 'Monitors' },
-      { id: 5, name: 'Headphones' },
-    ];
+    this.types = [];
   }
 
   setTypes(types: IType[]) {
@@ -30,6 +25,16 @@ class TypeStore {
 
   get myTypes() {
     return this.types;
+  }
+
+  async getAllTypes() {
+    try {
+      const { data }: any = await TypeService.getAllTypes();
+      console.log(data);
+      this.setTypes(data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 

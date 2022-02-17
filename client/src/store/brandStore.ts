@@ -1,5 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { IBrand } from '../interfaces/IBrand';
+import BrandService from '../service/brandService';
 
 class BrandStore {
   brands: IBrand[];
@@ -7,12 +8,7 @@ class BrandStore {
   constructor() {
     makeAutoObservable(this);
     this.selectBrand = {};
-    this.brands = [
-      { id: 1, name: 'Samsung' },
-      { id: 2, name: 'Xiaomi' },
-      { id: 3, name: 'Lenovo' },
-      { id: 4, name: 'Asus' },
-    ];
+    this.brands = [];
   }
 
   setBrands(brands: IBrand[]) {
@@ -29,6 +25,16 @@ class BrandStore {
 
   get mySelectBrand() {
     return this.selectBrand;
+  }
+
+  async getAllBrands() {
+    try {
+      const { data } = await BrandService.getAllBrands();
+      console.log(data);
+      this.setBrands(data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 

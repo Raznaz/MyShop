@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { observer } from 'mobx-react-lite';
+import React, { useEffect, useState } from 'react';
 import { Button, Col, Dropdown, Form, Modal, Row } from 'react-bootstrap';
 import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import { IModal } from '../../interfaces/IModal';
@@ -8,9 +9,25 @@ import typeStore from '../../store/typeStore';
 
 const CreateDevice = ({ show, onHide }: IModal) => {
   const [info, setInfo] = useState<any>([]);
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState(0);
+  const [file, setFile] = useState(null);
+  // const [brand, setBrand] = useState('');
+  // const [type, setType] = useState('');
+
+  useEffect(() => {
+    deviceStore.getAllDevice();
+    brandStore.getAllBrands();
+    typeStore.getAllTypes();
+  }, []);
 
   const addInfo = () => {
     setInfo([...info, { title: '', description: '', number: Date.now() }]);
+  };
+
+  const selectFile = (e: any) => {
+    console.log(e.target.files);
+    setFile(e.target.files[0]);
   };
 
   const removeInfo = (number: number) => {
@@ -31,28 +48,56 @@ const CreateDevice = ({ show, onHide }: IModal) => {
       <Modal.Body>
         <Form>
           <Dropdown>
-            <Dropdown.Toggle>Choose type</Dropdown.Toggle>
+            <Dropdown.Toggle>
+              {typeStore.selectType.name || 'Choose type'}
+            </Dropdown.Toggle>
             <Dropdown.Menu>
               {typeStore.types.map((type) => {
-                return <DropdownItem key={type.id}>{type.name}</DropdownItem>;
+                return (
+                  <DropdownItem
+                    onClick={() => typeStore.setSelectType(type)}
+                    key={type.id}>
+                    {type.name}
+                  </DropdownItem>
+                );
               })}
             </Dropdown.Menu>
           </Dropdown>
           <Dropdown className="mt-2">
-            <Dropdown.Toggle>Choose brand</Dropdown.Toggle>
+            <Dropdown.Toggle>
+              {brandStore.selectBrand.name || 'Choose brand'}
+            </Dropdown.Toggle>
             <Dropdown.Menu>
-              {brandStore.brands.map((type) => {
-                return <DropdownItem key={type.id}>{type.name}</DropdownItem>;
+              {brandStore.brands.map((brand) => {
+                return (
+                  <DropdownItem
+                    onClick={() => brandStore.setSelectBrand(brand)}
+                    key={brand.id}>
+                    {brand.name}
+                  </DropdownItem>
+                );
               })}
             </Dropdown.Menu>
           </Dropdown>
           <Form.Control
             placeholder="Add name "
             className="mt-3"
-            type="number"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
-          <Form.Control placeholder="Add price" className="mt-3" />
-          <Form.Control className="mt-3" type="file" />
+          <Form.Control
+            placeholder="Add price"
+            className="mt-3"
+            type="number"
+            value={price}
+            onChange={(e) => setPrice(Number(e.target.value))}
+          />
+          <Form.Control
+            className="mt-3"
+            type="file"
+            onChange={(e) => selectFile(e)}
+          />
           <hr />
           <Button variant="outline-info" onClick={addInfo}>
             Add new property
@@ -92,4 +137,4 @@ const CreateDevice = ({ show, onHide }: IModal) => {
   );
 };
 
-export default CreateDevice;
+export default observer(CreateDevice);

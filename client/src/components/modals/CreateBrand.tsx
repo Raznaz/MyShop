@@ -9,6 +9,8 @@ const CreateBrand = ({ show, onHide }: IModal) => {
   const handleBrandCreate = (name: string) => {
     brandStore.crateBrand(name);
     console.log('CREATED', name);
+    setBrand('');
+    onHide();
   };
 
   return (
@@ -19,7 +21,7 @@ const CreateBrand = ({ show, onHide }: IModal) => {
       <Modal.Body>
         <Form>
           <Form.Control
-            placeholder={'Enter name of Type'}
+            placeholder={'Enter name of BRAND'}
             value={brand}
             onChange={(e) => setBrand(e.target.value)}
           />

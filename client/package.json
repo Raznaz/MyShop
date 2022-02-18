@@ -7,8 +7,6 @@
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "@types/axios": "^0.14.0",
-    "@types/jest": "^27.4.0",
-    "@types/node": "^16.11.24",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
     "axios": "^0.26.0",
@@ -27,8 +25,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "jjjtest": "react-scripts test",
+    "eject": "react-scripts eject",
+    "test": "react-scripts test --coverage --detectOpenHandles --forceExit flag",
+    "test:watch ": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "eslintConfig": {
     "extends": [
@@ -49,6 +50,14 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.3.3"
+    "@types/enzyme": "^3.10.11",
+    "@types/jest": "^27.4.0",
+    "@types/node": "^17.0.18",
+    "@types/react-router-dom": "^5.3.3",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
+    "enzyme": "^3.11.0",
+    "enzyme-to-json": "^3.6.2",
+    "jest": "^27.5.1",
+    "ts-jest": "^27.1.3"
   }
 }

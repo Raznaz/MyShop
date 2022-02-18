@@ -58,10 +58,8 @@ class DeviceStore {
         page,
         limit
       );
-      console.log('store devices', data);
       this.setDevices(data.rows);
       this.setTotalCount(data.count);
-      console.log(this.totalCount);
       return data;
     } catch (error) {
       console.log(error);
@@ -71,7 +69,6 @@ class DeviceStore {
   async getOneDevice(id: number) {
     try {
       const { data } = await DeviceService.getOneDevice(id);
-      console.log('One device store', data);
       this.setOneDevice(data);
     } catch (error) {
       console.log(error);
@@ -80,11 +77,7 @@ class DeviceStore {
 
   async createDevice(device: any) {
     try {
-      console.log('device', device);
       const { data } = await DeviceService.createDevice(device);
-
-      console.log('store createDevice', data);
-
       return data;
     } catch (error) {
       console.log(error);

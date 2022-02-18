@@ -30,7 +30,6 @@ class BrandStore {
   async getAllBrands() {
     try {
       const { data } = await BrandService.getAllBrands();
-      console.log(data);
       this.setBrands(data);
     } catch (error) {
       console.log(error);

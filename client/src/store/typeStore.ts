@@ -30,7 +30,6 @@ class TypeStore {
   async getAllTypes() {
     try {
       const { data }: any = await TypeService.getAllTypes();
-      console.log(data);
       this.setTypes(data);
       return data;
     } catch (error) {

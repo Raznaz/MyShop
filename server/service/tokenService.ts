@@ -3,11 +3,11 @@ import model from '../models/model';
 class TokenService {
   generateToken(payload) {
     const accessToken = jwt.sign(payload, process.env.SECRET_KEY, {
-      expiresIn: '24h',
+      expiresIn: '30d',
     });
 
     const refreshToken = jwt.sign(payload, process.env.SECRET_KEY_REFRESH, {
-      expiresIn: '30d',
+      expiresIn: '15m',
     });
 
     return { accessToken, refreshToken };

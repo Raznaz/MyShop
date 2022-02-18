@@ -2,8 +2,13 @@ import api from '../http';
 import { AxiosResponse } from 'axios';
 import { IDevice } from '../interfaces/IDevice';
 export default class DeviceService {
-  static async getAllDevice() {
-    return api.get('/device');
+  static async getAllDevice(
+    typeId?: number | null,
+    brandId?: number | null,
+    page?: number | null,
+    limit = 2
+  ) {
+    return api.get('/device', { params: { typeId, brandId, page, limit } });
   }
 
   static async getOneDevice(id: number): Promise<AxiosResponse<IDevice>> {

@@ -11,10 +11,19 @@ import typeStore from '../store/typeStore';
 
 const Shop = () => {
   useEffect(() => {
-    deviceStore.getAllDevice(null, null, 1, 3);
+    deviceStore.getAllDevice(null, null, 1, 5);
     brandStore.getAllBrands();
     typeStore.getAllTypes();
   }, []);
+
+  useEffect(() => {
+    deviceStore.getAllDevice(
+      typeStore.selectType.id,
+      brandStore.selectBrand.id,
+      deviceStore.page,
+      5
+    );
+  }, [deviceStore.page, typeStore.selectType, brandStore.selectBrand]);
 
   return (
     <Container>

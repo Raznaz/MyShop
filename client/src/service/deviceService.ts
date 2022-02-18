@@ -6,7 +6,7 @@ export default class DeviceService {
     typeId?: number | null,
     brandId?: number | null,
     page?: number | null,
-    limit = 2
+    limit?: number | null
   ) {
     return api.get('/device', { params: { typeId, brandId, page, limit } });
   }

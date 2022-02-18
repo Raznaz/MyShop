@@ -49,7 +49,7 @@ class DeviceStore {
     typeId?: number | null,
     brandId?: number | null,
     page?: number | null,
-    limit = 2
+    limit?: number | null
   ) {
     try {
       const { data } = await DeviceService.getAllDevice(

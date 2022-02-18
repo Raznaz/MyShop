@@ -24,7 +24,7 @@ const DeviceItem = ({ id, img, name, rating, price }: IDevice) => {
             <Image src={star} />
           </div>
         </div>
-        <div>name: {name}</div>
+        <div>{name}</div>
       </Card>
     </Col>
   );

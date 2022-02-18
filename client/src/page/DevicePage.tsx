@@ -1,20 +1,18 @@
 import React, { useEffect } from 'react';
 import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
-import iphone from '../assets/iPhone-11-Pro.png';
 import bigStar from '../assets/bigStar.png';
 import { useParams } from 'react-router-dom';
 import deviceStore from '../store/deviceStore';
+import { observer } from 'mobx-react-lite';
 
 const DevicePage = () => {
   const { id }: any = useParams();
 
-  console.log('data', id);
-
   useEffect(() => {
     deviceStore.getOneDevice(id);
-  }, []);
+  }, [id]);
 
-  console.log('DeviceItem', deviceStore.oneDevice);
+  console.log('DeviceItem', deviceStore.oneDevice.info);
   return (
     <Container className="mt-3">
       <Row>
@@ -61,7 +59,7 @@ const DevicePage = () => {
       </Row>
       <Row className="d-flex flex-column m-3">
         <h1>Specification</h1>
-        {/* {description.map((item, i) => {
+        {deviceStore.oneDevice.info.map((item: any, i: any) => {
           return (
             <Row
               key={item.id}
@@ -72,10 +70,10 @@ const DevicePage = () => {
               {item.title}: {item.description}
             </Row>
           );
-        })} */}
+        })}
       </Row>
     </Container>
   );
 };
 
-export default DevicePage;
+export default observer(DevicePage);

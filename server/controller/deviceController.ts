@@ -7,9 +7,9 @@ class DeviceController {
   async create(req, res, next) {
     try {
       let { name, price, brandId, typeId, info } = req.body;
-      const { img } = req.files;
+      // const { img } = req.files;
       let fileName = uuidv4() + '.jpg';
-      img.mv(path.resolve(__dirname, '..', 'static', fileName));
+      // img.mv(path.resolve(__dirname, '..', 'static', fileName));
 
       const device: any = await model.Device.create({
         name,
@@ -17,10 +17,11 @@ class DeviceController {
         brandId,
         typeId,
         info,
-        img: fileName,
+        img: 'xiaomi.png',
       });
 
       if (info) {
+        console.log('infoController+++++++++++', info);
         info = JSON.parse(info);
         info.forEach((item) => {
           model.DeviceInfo.create({
@@ -40,7 +41,7 @@ class DeviceController {
     try {
       let { brandId, typeId, limit, page } = req.query;
       page = page || 1;
-      limit = limit || 9;
+      limit = limit || 20;
       let offset = page * limit - limit;
 
       let devices;

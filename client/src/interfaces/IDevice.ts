@@ -3,5 +3,7 @@ export interface IDevice {
   name: string;
   price: number;
   rating: number;
+  brandId?: number;
+  typeId?: number;
   img: string;
 }

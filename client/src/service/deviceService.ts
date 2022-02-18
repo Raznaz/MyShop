@@ -10,7 +10,14 @@ export default class DeviceService {
     return api.get(`device/${id}`);
   }
 
-  static async createDevice(device: IDevice) {
-    return api.post('/device', { ...device });
+  static async createDevice({ name, price, brandId, typeId, info }: any) {
+    console.log('info', info);
+    return api.post('/device', {
+      name,
+      price,
+      info,
+      brandId,
+      typeId,
+    });
   }
 }

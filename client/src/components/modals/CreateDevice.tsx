@@ -21,8 +21,18 @@ const CreateDevice = ({ show, onHide }: IModal) => {
     typeStore.getAllTypes();
   }, []);
 
+  console.log('info', info);
+
   const addInfo = () => {
     setInfo([...info, { title: '', description: '', number: Date.now() }]);
+  };
+
+  const changeInfo = (key: string, value: string, number: number) => {
+    setInfo(
+      info.map((item: any) =>
+        item.number === number ? { ...item, [key]: value } : item
+      )
+    );
   };
 
   const selectFile = (e: any) => {
@@ -36,6 +46,25 @@ const CreateDevice = ({ show, onHide }: IModal) => {
         return prop.number !== number;
       })
     );
+  };
+
+  const addDevice = () => {
+    console.log('add device');
+    // const formData = new FormData();
+    // formData.append('name', name);
+    // formData.append('price', `${price}`);
+    // formData.append('img', String(file));
+    // formData.append('brandId', brandStore.selectBrand.id);
+    // formData.append('typeId', typeStore.selectType.id);
+    // formData.append('info', JSON.stringify(info));
+    const device = {
+      name,
+      price,
+      brandId: brandStore.selectBrand.id,
+      typeId: typeStore.selectType.id,
+      info: JSON.stringify(info),
+    };
+    deviceStore.createDevice(device);
   };
 
   return (
@@ -106,10 +135,22 @@ const CreateDevice = ({ show, onHide }: IModal) => {
             return (
               <Row key={i.number} className="mt-3">
                 <Col md={4}>
-                  <Form.Control placeholder="Enter name property" />
+                  <Form.Control
+                    value={i.title}
+                    onChange={(e) =>
+                      changeInfo('title', e.target.value, i.number)
+                    }
+                    placeholder="Enter name property"
+                  />
                 </Col>
                 <Col md={4}>
-                  <Form.Control placeholder="Enter describe property" />
+                  <Form.Control
+                    value={i.description}
+                    onChange={(e) =>
+                      changeInfo('description', e.target.value, i.number)
+                    }
+                    placeholder="Enter describe property"
+                  />
                 </Col>
                 <Col md={4}>
                   <Button
@@ -129,7 +170,7 @@ const CreateDevice = ({ show, onHide }: IModal) => {
         <Button variant="outline-danger" onClick={onHide}>
           Close
         </Button>
-        <Button variant="outline-success" onClick={onHide}>
+        <Button variant="outline-success" onClick={() => addDevice()}>
           Add type
         </Button>
       </Modal.Footer>

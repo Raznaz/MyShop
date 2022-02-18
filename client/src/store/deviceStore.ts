@@ -38,15 +38,16 @@ class DeviceStore {
   async getOneDevice(id: number) {
     try {
       const { data } = await DeviceService.getOneDevice(id);
-      console.log(data);
+      console.log('One device store', data);
       this.setOneDevice(data);
     } catch (error) {
       console.log(error);
     }
   }
 
-  async createDevice(device: IDevice) {
+  async createDevice(device: any) {
     try {
+      console.log('device', device);
       const { data } = await DeviceService.createDevice(device);
       console.log('store createDevice', data);
       return data;

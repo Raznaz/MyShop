@@ -7,7 +7,6 @@ const CreateType = ({ show, onHide }: IModal) => {
   const [type, setType] = useState('');
 
   const handleAddType = (type: string) => {
-    console.log('handleAddType', type);
     typeStore.createType(type);
     setType('');
     onHide();

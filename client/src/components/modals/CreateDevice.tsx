@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Dropdown, Form, Modal, Row } from 'react-bootstrap';
-import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import { IModal } from '../../interfaces/IModal';
 import brandStore from '../../store/brandStore';
 import deviceStore from '../../store/deviceStore';
@@ -83,11 +82,11 @@ const CreateDevice = ({ show, onHide }: IModal) => {
             <Dropdown.Menu>
               {typeStore.types.map((type) => {
                 return (
-                  <DropdownItem
+                  <Dropdown.Item
                     onClick={() => typeStore.setSelectType(type)}
                     key={type.id}>
                     {type.name}
-                  </DropdownItem>
+                  </Dropdown.Item>
                 );
               })}
             </Dropdown.Menu>
@@ -99,11 +98,11 @@ const CreateDevice = ({ show, onHide }: IModal) => {
             <Dropdown.Menu>
               {brandStore.brands.map((brand) => {
                 return (
-                  <DropdownItem
+                  <Dropdown.Item
                     onClick={() => brandStore.setSelectBrand(brand)}
                     key={brand.id}>
                     {brand.name}
-                  </DropdownItem>
+                  </Dropdown.Item>
                 );
               })}
             </Dropdown.Menu>

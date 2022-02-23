@@ -9,12 +9,12 @@ const RegistrationForm = () => {
   return (
     <div>
       <h1>Registration</h1>
-      <input
+      {/* <input
         type="text"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-      />
+      /> */}
       <input
         type="password"
         placeholder="Password"
